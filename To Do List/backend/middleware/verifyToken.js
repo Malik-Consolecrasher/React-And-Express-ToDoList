@@ -5,6 +5,10 @@ function verifyToken(req, res, next) {
     const token = req.headers["authorization"];
     const tokenExtract = token.split(" ")[1];
 
+    const payload = jwt.verify(tokenExtract, "Crasher");
+
+    res.payload = payload;
+    
     next();
   } catch (error) {
     console.log(error);

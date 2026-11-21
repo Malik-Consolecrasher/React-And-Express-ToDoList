@@ -12,6 +12,7 @@ const addTaskRoute = (app) => {
 
       user.toDoList.push(userTask);
       console.log(user);
+      console.log(res.payload)
       res.send({ tasks: user.toDoList });
     } catch (error) {
       console.log(error);

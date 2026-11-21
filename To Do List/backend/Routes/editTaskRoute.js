@@ -10,16 +10,21 @@ const addTaskRoute = (app) => {
     let newTask = req.body.newTask;
     let userID = Number(req.body.user);
 
+
+
     try {
-      if (userInformation[userID - 1].toDoList.indexOf(oldTask) === -1) {
+      let databaseUser = userInformation.find((user) => user.id === userID);
+
+
+      if (databaseUser.toDoList.indexOf(oldTask) === -1) {
         res.status(403).json({ messsage: "Cannot find task to edit" });
       } else {
-        userInformation[userID - 1].toDoList.splice(
-          userInformation[userID - 1].toDoList.indexOf(oldTask),
+        databaseUser.toDoList.splice(
+          databaseUser.toDoList.indexOf(oldTask),
           1,
           newTask,
         );
-        res.send({ tasks: userInformation[userID - 1].toDoList });
+        res.send({ tasks: databaseUser.toDoList });
       }
     } catch (error) {
       console.log(error);

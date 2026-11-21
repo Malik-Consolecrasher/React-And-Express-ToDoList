@@ -3,7 +3,7 @@ const { verifyToken } = require("../middleware/verifyToken.js");
 
 const getTaskRoute = (app) => {
   app.get("/GetTask", verifyToken, (req, res) => {
-    let userID = req.query.UserID;
+    let userID = Number(req.query.UserID);
 
     try {
       let user = userInformation.find((user) => user.id === userID);
