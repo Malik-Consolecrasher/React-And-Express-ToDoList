@@ -11,7 +11,7 @@ const deleteTaskRoute = (app) => {
     try {
       let databaseUser = userInformation.find((user) => user.id === userID);
 
-      if (databaseUser.toDoList.indexOf(oldTask) === -1) {
+      if (databaseUser.toDoList.indexOf(userTask) === -1) {
         res.status(403).json({ messsage: "Cannot find task to edit" });
       } else {
       databaseUser.toDoList.splice(
