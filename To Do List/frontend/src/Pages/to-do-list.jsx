@@ -65,7 +65,6 @@ function ToDoList() {
       method: "GET",
       headers: {
         Authorization: "Bearer " + loginToken,
-        "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())

@@ -1,11 +1,12 @@
 const userInformation = require("../Controllers/mockDatabase.js");
 const { taskLengthChecker } = require("../middleware/taskLengthChecker.js");
 const { verifyToken } = require("../middleware/verifyToken.js");
+const { checkForJSON } = require("../middleware/CheckForJSON.js");
 
 //takes in two values from the body, finds one to delete, and replaces it with the second value
 
 const addTaskRoute = (app) => {
-  app.post("/EditTask", taskLengthChecker, verifyToken, (req, res) => {
+  app.post("/EditTask", checkForJSON, taskLengthChecker, verifyToken, (req, res) => {
     let oldTask = req.body.oldTask;
     let newTask = req.body.newTask;
     let userID = Number(req.body.user);
@@ -17,7 +18,7 @@ const addTaskRoute = (app) => {
 
 
       if (databaseUser.toDoList.indexOf(oldTask) === -1) {
-        res.status(403).json({ messsage: "Cannot find task to edit" });
+        res.status(403).json({ message: "Cannot find task to edit" });
       } else {
         databaseUser.toDoList.splice(
           databaseUser.toDoList.indexOf(oldTask),
@@ -28,7 +29,7 @@ const addTaskRoute = (app) => {
       }
     } catch (error) {
       console.log(error);
-      res.status(403).json({ messsage: "Unable to Edit Task" });
+      res.status(403).json({ message: "Unable to Edit Task" });
     }
   });
 };

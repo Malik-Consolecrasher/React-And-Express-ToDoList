@@ -1,5 +1,6 @@
 const userInformation = require("../Controllers/mockDatabase.js");
 const { verifyToken } = require("../middleware/verifyToken.js");
+const { checkForJSON } = require("../middleware/CheckForJSON.js");
 
 const getTaskRoute = (app) => {
   app.get("/GetTask", verifyToken, (req, res) => {
@@ -12,7 +13,7 @@ const getTaskRoute = (app) => {
       res.send({ tasks: user.toDoList });
     } catch (error) {
       console.log(error);
-      res.status(403).json({ messsage: "Unable to Get Task" });
+      res.status(403).json({ message: "Unable to Get Task" });
     }
   });
 };

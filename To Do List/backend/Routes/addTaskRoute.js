@@ -1,9 +1,10 @@
 const userInformation = require("../Controllers/mockDatabase.js");
 const { taskLengthChecker } = require("../middleware/taskLengthChecker.js");
 const { verifyToken } = require("../middleware/verifyToken.js");
+const { checkForJSON } = require("../middleware/CheckForJSON.js");
 
 const addTaskRoute = (app) => {
-  app.post("/AddTask", taskLengthChecker, verifyToken, (req, res) => {
+  app.post("/AddTask", checkForJSON, taskLengthChecker, verifyToken, (req, res) => {
     let userTask = req.body.task;
     let userID = Number(req.body.user);
 
@@ -16,7 +17,7 @@ const addTaskRoute = (app) => {
       res.send({ tasks: user.toDoList });
     } catch (error) {
       console.log(error);
-      res.status(403).json({ messsage: "Unable to send Task" });
+      res.status(403).json({ message: "Unable to send Task" });
     }
   });
 };
